@@ -31,8 +31,15 @@ var movieSchema = new mongoose.Schema({
     genere: [{
         type: String,
         enum: ['horror', 'fantasy', 'commedia', 'thriller', 'drammatico', 'romantico']
-    }]
-
+    }],
+    dataCreazione: {
+        type: Date,
+    }
 });
+
+movieSchema.pre('save', function (next){
+    this.dataCreazione = Date.now()
+    next()
+})
 
 module.exports = mongoose.model('movie', movieSchema )
