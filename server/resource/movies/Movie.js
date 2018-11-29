@@ -38,7 +38,11 @@ var movieSchema = new mongoose.Schema({
     actors: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Actor'
-    }]
+    }],
+    locandina: {
+        type: String,
+        default: "http://www.viaggiatorinelmondo.com/wp-content/uploads/2015/10/foca0.jpg"
+    }
 });
 
 movieSchema.pre('save', function (next){

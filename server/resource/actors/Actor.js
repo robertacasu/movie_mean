@@ -16,9 +16,9 @@ var actorSchema = new mongoose.Schema({
     eta: {
         type: Number
     },
-    immagine: {
+    foto: {
         type: String,
-        
+        default: "https://st3.depositphotos.com/1432405/12655/v/950/depositphotos_126557196-stock-illustration-full-male-avatar-icon-flat.jpg"
     }
 });
 
