@@ -2,17 +2,32 @@ module.exports = (function () {
 
     var Actor = require('./Actor')
 
-    var getAll = function (req, res) {
-         var query = Actor.find(); query
-        .exec()
+    // var getAll = function (req, res) {
+    //      var query = Actor.find(); 
+    //      query
+    //     .exec()
             
-            .then(function (actors) {
-                res.json(actors)
-            })
-            .catch(function (err) {
-                res.json(err);
-            });
+    //         .then(function (data) {
+    //             res.json(data)
+    //         })
+    //         .catch(function (err) {
+    //             res.json(err);
+    //         });
+    // }
+
+    var getAll = async function (req, res) {
+        try {
+            var actors = await Actor.find ();
+            res.json(actors)
     }
+
+
+        catch (err) {
+            res.json(err);
+        }
+    }
+    return {getAll}
+
 
 
     // var getOne = function (req, res) {
