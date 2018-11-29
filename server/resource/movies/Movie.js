@@ -30,7 +30,7 @@ var movieSchema = new mongoose.Schema({
 
     genere: [{
         type: String,
-        enum: ['horror', 'fantasy', 'commedia', 'thriller']
+        enum: ['horror', 'fantasy', 'commedia', 'thriller', 'drammatico', 'romantico']
     }]
 
 });
