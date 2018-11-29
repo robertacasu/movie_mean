@@ -7,5 +7,6 @@ module.exports = function (app, express) {
     
     //middleware routing
     app.use('/movies', require('../resource/movies/index.js'));
+    app.use('/actors', require('../resource/actors/index.js'));
 
 }
