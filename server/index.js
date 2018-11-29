@@ -1,6 +1,8 @@
 var express = require('express');
 const app = express();
 const PORT = 3000 || process.env.port;
+require('./config/db.js');
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 var path = require('path');

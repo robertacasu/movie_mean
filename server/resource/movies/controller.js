@@ -1,5 +1,7 @@
 module.exports = (function () {
 
+    var Movie = require('./Movie')
+
     var getAll = function (req, res) {
         res.json ("lista di tutti i films")
     }
@@ -8,8 +10,14 @@ module.exports = (function () {
         res.json("lista di un film di id: "+ id )
     }
     var postOne = function (req, res) {
-        var body = req.body
-        res.json( body )
+        var nuovo = new Movie(req.body)
+        nuovo.save()
+            .then(function (data) {
+                res.json(data)
+            })
+            .catch(function (err) {
+                res.json (err);
+            });
     }
     var putOne = function (req, res) {
         var id = req.params.id
