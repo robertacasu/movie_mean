@@ -34,7 +34,11 @@ var movieSchema = new mongoose.Schema({
     }],
     dataCreazione: {
         type: Date,
-    }
+    },
+    actors: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Actor'
+    }]
 });
 
 movieSchema.pre('save', function (next){

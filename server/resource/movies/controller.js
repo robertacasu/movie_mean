@@ -1,6 +1,7 @@
 module.exports = (function () {
 
     var Movie = require('./Movie')
+    var Actor = require('../actors/Actor')
 
     var getAll = function (req, res) {
         // Movie.find()
@@ -33,7 +34,14 @@ module.exports = (function () {
         }
 
 
-        query.exec()
+        query
+            .populate({
+                path: 'actors',
+                match: { eta: { $gte: 10 } },
+                select: ['nome', 'eta']
+            })
+        .exec()
+            
             .then(function (movies) {
                 res.json(movies)
             })

@@ -6,6 +6,6 @@ module.exports = function (app, express) {
     // })
     
     //middleware routing
-    app.use('/movies', require('../resource/movies/movies.js'));
+    app.use('/movies', require('../resource/movies/index.js'));
 
 }
