@@ -3,11 +3,26 @@ module.exports = (function () {
     var Movie = require('./Movie')
 
     var getAll = function (req, res) {
-        res.json ("lista di tutti i films")
+        Movie.find()
+            .exec()
+            .then(function (movies) {
+                res.json(movies);
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
     }
     var getOne = function (req, res) {
-        var id = req.params.id
-        res.json("lista di un film di id: "+ id )
+        
+        Movie.findById(req.params.id)
+            .exec()
+            .then(function (movie) {
+                res.json(movie)
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+        
     }
     var postOne = function (req, res) {
         var nuovo = new Movie(req.body)

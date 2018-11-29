@@ -6,19 +6,19 @@ var controller = require ('./controller')
 router.get('/',controller.getAll)
 
 // // LISTA UN FILM
-router.get('/:id([0-9]{1,4})',controller.getOne)
+router.get('/:id([a-z0-9]{24})',controller.getOne)
 
 // CREAZIONE UN FILM
 router.post('/', controller.postOne)
 
 // MODIFICA UN FILM
-router.put('/:id([0-9]{1,4})', controller.putOne)
+router.put('/:id([a-z0-9]{24})', controller.putOne)
 
 // ELIMINAZIONE UN FILM
-router.delete('/:id([0-9]{1,4})', controller.deleteOne)
+router.delete('/:id([a-z0-9]{24})', controller.deleteOne)
 
 // VOTAZIONE UN FILM
-router.put('/voto/:id([0-9]{1,4})', controller.voteOne)
+router.put('/voto/:id([a-z0-9]{24})', controller.voteOne)
 
 module.exports = router;
 
