@@ -1,5 +1,5 @@
 module.exports = (function () {
-
+    var movies = require('../movies/Movie')
     var Actor = require('./Actor')
 
     // var getAll = function (req, res) {
@@ -21,7 +21,10 @@ module.exports = (function () {
             query.where('etamax').lt(req.query.etamax).sort({ field: 1 })
         }
         try {
-            var actors = await query;
+            var actors = await query.populate({
+                path: 'movies',
+                select: ['titolo']
+            });
             res.json(actors)
     }
      catch (err) {

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 mongoose.connect(
-    'mongodb://localhost:27017/themoviedb',
+    'mongodb://admin:admin1990@ds141783.mlab.com:41783/themoviedb',
     { 
         useCreateIndex:true,
         useNewUrlParser: true },
