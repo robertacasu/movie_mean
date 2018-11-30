@@ -60,6 +60,16 @@ module.exports = (function () {
                 res.json(err);
             })
     }
+    var deleteOne = function (req,res) {
+        Actor.findByIdAndRemove(req.params.id)
+        .exec()
+        .then (function(){
+            res.json("è stato cancellato l'attore richiesto")
+        })
+            .catch(function (err) {
+                res.json(err);
+            })
+    }
 
 
 
@@ -83,22 +93,8 @@ module.exports = (function () {
         
 
   
-    // var putOne = function (req, res) {
-    //     var id = req.params.id
-    //     var film = req.body
-    //     res.json(film)
-    // }
-    // var deleteOne = function (req, res) {
-    //     Actor.findByIdAndRemove(req.params.id)
-    //         .exec()
-    //         .then(function () {
-    //             res.json("hai cancellato il film richiesto")
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-        
-    // }
+    
+    
     // var voteOne = function (req, res) {
     //     var voto= req.body.voto
 
@@ -124,7 +120,7 @@ module.exports = (function () {
         getOne: getOne,
         postOne: postOne,
         putOne: putOne,
-        // deleteOne: deleteOne,
+        deleteOne: deleteOne,
         // voteOne: voteOne,
     }
 })()

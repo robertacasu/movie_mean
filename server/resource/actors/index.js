@@ -15,7 +15,7 @@ router.post('/', controller.postOne)
 router.put('/:id([a-z0-9]{24})', controller.putOne)
 
 // // ELIMINAZIONE UN FILM
-// router.delete('/:id([a-z0-9]{24})', controller.deleteOne)
+router.delete('/:id([a-z0-9]{24})', controller.deleteOne)
 
 // // VOTAZIONE UN FILM
 // router.put('/voto/:id([a-z0-9]{24})', controller.voteOne)
