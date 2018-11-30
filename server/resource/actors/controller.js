@@ -14,10 +14,14 @@ module.exports = (function () {
     //             res.json(err);
     //         });
     // }
-
+    
     var getAll = async function (req, res) {
+        var query = Actor.find();
+        if (req.query.eta) {
+            query.where('etamax').lt(req.query.etamax).sort({ field: 1 })
+        }
         try {
-            var actors = await Actor.find ();
+            var actors = await query;
             res.json(actors)
     }
      catch (err) {
@@ -70,57 +74,14 @@ module.exports = (function () {
                 res.json(err);
             })
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-        
+   
 
-  
-    
-    
-    // var voteOne = function (req, res) {
-    //     var voto= req.body.voto
-
-    //     Actor.findById(req.params.id)
-    //         .exec()
-    //         .then(function (actor) {
-    //             actor.nvoti += 1;
-    //             actor.voto = (actor.voto+ voto)/ actor.nvoti;
-                
-    //             return actor.save();
-    //         })
-    //         .then(function (data) {
-    //             res.json(data);
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-
-    // }
-    // creazione film + modifica di un film + eliminazione + voto il film
     return {
         getAll: getAll,
         getOne: getOne,
         postOne: postOne,
         putOne: putOne,
         deleteOne: deleteOne,
-        // voteOne: voteOne,
     }
 })()
