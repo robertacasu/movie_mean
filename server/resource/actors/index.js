@@ -12,7 +12,7 @@ router.get('/:id([a-z0-9]{24})', controller.getOne)
 router.post('/', controller.postOne)
 
 // // MODIFICA UN FILM
-// router.put('/:id([a-z0-9]{24})', controller.putOne)
+router.put('/:id([a-z0-9]{24})', controller.putOne)
 
 // // ELIMINAZIONE UN FILM
 // router.delete('/:id([a-z0-9]{24})', controller.deleteOne)

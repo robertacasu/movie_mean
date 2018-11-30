@@ -45,7 +45,21 @@ module.exports = (function () {
                 res.json(err);
             })
     }
-
+    var putOne = function (req,res) {
+        var body = req.body
+        Actor.findById(req.params.id)
+        .exec()
+            .then(function (actor) {
+                Object.assign(actor, req.body)
+                return actor.save()
+            })
+            .then(function(data){
+                res.json(data)
+            })
+            .catch(function (err) {
+                res.json(err);
+            })
+    }
 
 
 
@@ -68,16 +82,7 @@ module.exports = (function () {
     
         
 
-    // var postOne = function (req, res) {
-    //     var nuovo = new Actor(req.body)
-    //     nuovo.save()
-    //         .then(function (data) {
-    //             res.json(data)
-    //         })
-    //         .catch(function (err) {
-    //             res.json (err);
-    //         });
-    // }
+  
     // var putOne = function (req, res) {
     //     var id = req.params.id
     //     var film = req.body
@@ -118,7 +123,7 @@ module.exports = (function () {
         getAll: getAll,
         getOne: getOne,
         postOne: postOne,
-        // putOne: putOne,
+        putOne: putOne,
         // deleteOne: deleteOne,
         // voteOne: voteOne,
     }
