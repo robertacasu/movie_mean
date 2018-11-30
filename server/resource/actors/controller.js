@@ -20,28 +20,54 @@ module.exports = (function () {
             var actors = await Actor.find ();
             res.json(actors)
     }
-
-
-        catch (err) {
+     catch (err) {
             res.json(err);
         }
     }
-    return {getAll}
+    // return {getAll};
+
+    var getOne = function (req,res) {
+        Actor.findById(req.params.id) 
+        .exec()
+        .then (function (data) {
+            res.json(data)
+        })
+            .catch(function (err) {
+                res.json(err);
+            }); }
+    var postOne = function (req,res) {
+        var nuovo = new Actor (req.body)
+        nuovo.save()
+        .then (function (data) {
+            res.json(data)
+        })
+            .catch(function (err) {
+                res.json(err);
+            })
+    }
 
 
 
-    // var getOne = function (req, res) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
         
-    //     Actor.findById(req.params.id)
-    //         .exec()
-    //         .then(function (actor) {
-    //             res.json(actor)
-    //         })
-    //         .catch(function (err) {
-    //             res.json(err);
-    //         });
-        
-    // }
+
     // var postOne = function (req, res) {
     //     var nuovo = new Actor(req.body)
     //     nuovo.save()
@@ -90,8 +116,8 @@ module.exports = (function () {
     // creazione film + modifica di un film + eliminazione + voto il film
     return {
         getAll: getAll,
-        // getOne: getOne,
-        // postOne: postOne,
+        getOne: getOne,
+        postOne: postOne,
         // putOne: putOne,
         // deleteOne: deleteOne,
         // voteOne: voteOne,

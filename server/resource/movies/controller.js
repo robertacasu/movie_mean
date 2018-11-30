@@ -14,8 +14,8 @@ module.exports = (function () {
         //     });
 
         var query = Movie.find();
-        if (req.query.anno){
-            query.where('anno').equals(req.query.anno).sort({field: 1})
+        if (req.query.anno) {
+            query.where('anno').equals(req.query.anno).sort({ field: 1 })
         }
         if (req.query.votomin) {
             query.where('votomin').gt(req.query.votomin).sort({ field: 1 })
@@ -40,8 +40,8 @@ module.exports = (function () {
                 match: { eta: { $gte: 10 } },
                 select: ['nome', 'eta']
             })
-        .exec()
-            
+            .exec()
+
             .then(function (movies) {
                 res.json(movies)
             })
@@ -50,7 +50,7 @@ module.exports = (function () {
             });
     }
     var getOne = function (req, res) {
-        
+
         Movie.findById(req.params.id)
             .exec()
             .then(function (movie) {
@@ -59,7 +59,7 @@ module.exports = (function () {
             .catch(function (err) {
                 res.json(err);
             });
-        
+
     }
     var postOne = function (req, res) {
         var nuovo = new Movie(req.body)
@@ -68,34 +68,45 @@ module.exports = (function () {
                 res.json(data)
             })
             .catch(function (err) {
-                res.json (err);
-            });
-    }
-    var putOne = function (req, res) {
-        var id = req.params.id
-        var film = req.body
-        res.json(film)
-    }
-    var deleteOne = function (req, res) {
-        Movie.findByIdAndRemove(req.params.id)
-            .exec()
-            .then(function () {
-                res.json("hai cancellato il film richiesto")
-            })
-            .catch(function (err) {
                 res.json(err);
             });
-        
-    }
-    var voteOne = function (req, res) {
-        var voto= req.body.voto
+    } 
+   var deleteOne = function (req, res) {
+    Movie.findByIdAndRemove(req.params.id)
+        .exec()
+        .then(function () {
+            res.json("hai cancellato il film richiesto")
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
 
+}
+    var putOne = function (req, res) {
+        var body = req.body
+        Movie.findById(req.params.id)
+            .exec()
+        .then(function (movie) {
+            Object.assign(movie,req.body)
+            return movie.save()})
+         .then(function (movie) {
+        // res.json('Film aggiornato'); 
+        res.json({
+            resp: "Film aggiornato",
+            movie: movie})
+    })
+        .catch(function (err) {
+            throw err;
+        });
+}
+    var voteOne = function (req, res) {
+        var voto = req.body.voto
         Movie.findById(req.params.id)
             .exec()
             .then(function (movie) {
                 movie.nvoti += 1;
-                movie.voto = (movie.voto+ voto)/ movie.nvoti;
-                
+                movie.votoTot += req.body.voto;
+                movie.votoMedio = (movie.votoTot / movie.nvoti)
                 return movie.save();
             })
             .then(function (data) {
@@ -106,13 +117,13 @@ module.exports = (function () {
             });
 
     }
-    // creazione film + modifica di un film + eliminazione + voto il film
-    return {
-        getAll: getAll,
-        getOne: getOne,
-        postOne: postOne,
-        putOne: putOne,
-        deleteOne: deleteOne,
-        voteOne: voteOne,
-    }
-})()
+// creazione film + modifica di un film + eliminazione + voto il film
+return {
+    getAll: getAll,
+    getOne: getOne,
+    postOne: postOne,
+    putOne: putOne,
+    deleteOne: deleteOne,
+    voteOne: voteOne,
+}
+}) ()

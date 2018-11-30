@@ -17,7 +17,7 @@ var movieSchema = new mongoose.Schema({
         max: 2020
     },
 
-    voto: {
+    votoMedio: {
         type: Number,
         default:0,
         min: 0,
@@ -26,6 +26,11 @@ var movieSchema = new mongoose.Schema({
     nvoti: {
         type: Number,
         default: 0
+    },
+    votoTot: {
+        type: Number,
+        default: 0,
+        min: 0,
     },
 
     genere: [{
